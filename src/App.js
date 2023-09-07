@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import React,{Fragment,useState} from 'react'
+import InventryForm from './InventryForm/InventryForm';
+import InventryList from './InventryList/InventryList';
+const medicalInventry=[]
 function App() {
+  const [addMedicine,isAddMedicine]=useState(medicalInventry)
+   const addInventry=(item)=>{
+    
+    isAddMedicine((oldObj)=>{
+      return [item,...oldObj]
+    })
+   }
+   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Fragment>
+      <header>
+        <InventryForm onEntered={addInventry} />
       </header>
-    </div>
+      <main>
+       <InventryList medicineList={addMedicine}/>
+      </main>
+    </Fragment>
   );
 }
 
